@@ -1,0 +1,54 @@
+
+.cont-grid {
+    display: block;
+    position: relative;
+    width: 100%;
+}
+
+.cell {
+    float: left;
+    background-color: #eee;
+    border-radius: 50%;
+    display: block;
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 2em;
+    text-align: center;
+}
+
+div.cell > p {
+    padding: 0 0 0 0;
+    width: 100%;
+}
+
+.title {
+    width: 96%;
+    padding: 0 2% 0 2%;
+    margin: 2vh 0 2vh 0; 
+}
+
+.title p {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 6em;
+    font-weight: 700;
+    text-align: center;
+}
+
+@media screen and (max-height: 768px) and (max-width: 768){
+    .cont-grid {
+        width: 20vh;
+    }
+}
+
+@media screen and (orientation: landscape) {
+    html {
+      transform: rotate(-90deg);
+      transform-origin: left top;
+      width: 100vh;
+      overflow-x: hidden;
+      position: absolute;
+      top: 100%;
+      left: 0;
+    }
+  }

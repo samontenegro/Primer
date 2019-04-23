@@ -47,7 +47,7 @@ function makeSequence (n) { // generates a random sequence of the numbers 1, 2, 
     return seq
 }
 
-function isPrime (num) {
+function isPrime (num) { // checks whether a number 'num' is prime or not
         if (num == 1) return true;
         for(let i = 2, s = Math.sqrt(num); i <= s; i++){
             if(num % i === 0) return false;
@@ -79,14 +79,16 @@ function setNumbers (n) { // fills the n^2 cells with a number, so that n/2 cell
             }
         }
 
+        let val_2 = Math.floor((val + getRandomInt(Diff_max)) / 3);
+
         if (next_selected_cell) {
-            while (val > 0) {
-                if (isPrime(val)) {
-                    next_selected_cell.firstElementChild.textContent = `${val}`;
+            while (val_2 > 0) {
+                if (isPrime(val_2)) {
+                    next_selected_cell.firstElementChild.textContent = `${val_2}`;
                     next_selected_cell.setAttribute('data-prime','data-prime');
                     break
                 }
-                val -= 1
+                val_2 -= 1
             }
         }
     }
@@ -104,8 +106,8 @@ function highlightPrimes () { // highlights cells with prime values
     );
 }
 
-let N = 5;
-let Diff_max = 200;
+let N = 4;
+let Diff_max = 400;
 
 // Making a truly square board
 const board = document.querySelector("#board");
@@ -122,3 +124,5 @@ window.addEventListener('resize', () => resizeCells());
 
 // Ref for cells appearing in the board
 let cells = board.querySelectorAll('.cell');
+
+setNumbers(N);

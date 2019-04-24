@@ -113,10 +113,11 @@ function highlightPrimes () { // highlights cells with prime values
 }
 
 function acceptRound () { // decides if selected cells win round
-    primeCount = 0;
+    let primeCount = 0;
+    let currentTime = parseInt(timer.textContent);
     Array.from(cells).forEach(
         function (x) {
-            if (x.classList.contains('selected') && x.getAttribute('data-prime') !== null) {
+            if (x.classList.contains('selected') && x.getAttribute('data-prime') !== null && currentTime > 0) {
                 primeCount += 1;
             }
         }
@@ -125,8 +126,24 @@ function acceptRound () { // decides if selected cells win round
     else {return false}
 }
 
+function startTimer(time) {
+    timer.textContent = `${time}`;
+    let timeDisplay = setInterval( function() {
+        if (time > 0) {
+            time -= 1;
+            timer.textContent = `${time}`;
+        } else {
+            timer.textContent = `${time}`;
+            clearInterval(timeDisplay);
+        }
+    },1000);
+}
+
+const time = 20;
+const timer = document.querySelector("#timer");
+
 let N = 4;
-let Diff_max = 800;
+let Diff_max = 100;
 
 // Making a truly square board
 const board = document.querySelector("#board");
@@ -143,6 +160,8 @@ window.addEventListener('resize', () => resizeCells());
 
 // Ref for cells appearing in the board and setting event listeners for 'click' event
 const cells = board.querySelectorAll('.cell');
+const next = document.querySelector('#next-round');
+
 cells.forEach(
     function (x) {
         x.addEventListener('click',
@@ -156,3 +175,4 @@ cells.forEach(
 
 
 setNumbers();
+startTimer(time);

@@ -29,7 +29,9 @@
     font-family: "Roboto Condensed", sans-serif;
     font-size: 300%;
     text-align: center;
-    user-select: none;
+    
+         user-select: none;
+    -moz-user-select: none;
 }
 
 div.cell.selected {

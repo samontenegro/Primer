@@ -55,21 +55,26 @@ function isPrime (num) { // checks whether a number 'num' is prime or not
         return num > 1;
 }
 
-function getRandomInt (max) {
+function getRandomInt (max) { // returns a positive random integer
     max = Math.floor(max);
     return Math.floor(Math.random() * (max + 1)) +1;
 }
 
-function setNumbers (n) { // fills the n^2 cells with a number, so that n/2 cells contain primes
-    let mapping = makeSequence(n);
+function setNumbers () { // fills the N^2 cells with a number, so that N/2 cells contain primes
+    let mapping = makeSequence(N);
     let cellArray = Array.from(cells);
-    for (i=0;i<n**2;i += 2) {
+
+    cells.forEach(function (x) {
+        x.classList.remove('selected','highlight');
+    });
+
+    for (i=0;i<N**2;i += 2) {
         let val = getRandomInt(Diff_max);
         let selected_cell = cellArray[mapping[i]];
         let next_selected_cell = cellArray[mapping[i+1]];
 
         while (val > 0) { 
-            if (isPrime(val)) {
+            if (isPrime(val) || val % 2 === 0) {
                 val += 1;
                 continue
             } else {
@@ -79,9 +84,10 @@ function setNumbers (n) { // fills the n^2 cells with a number, so that n/2 cell
             }
         }
 
-        let val_2 = Math.floor((val + getRandomInt(Diff_max)) / 3);
+        let val_2 = Math.floor((val + getRandomInt(Diff_max)) / 4);
 
         if (next_selected_cell) {
+
             while (val_2 > 0) {
                 if (isPrime(val_2)) {
                     next_selected_cell.firstElementChild.textContent = `${val_2}`;
@@ -98,16 +104,29 @@ function setNumbers (n) { // fills the n^2 cells with a number, so that n/2 cell
 function highlightPrimes () { // highlights cells with prime values
     cells.forEach(
         function (cell) {
-            cell.style.backgroundColor = "#eee";
+            cell.classList.remove('highlight');
             if (cell.getAttribute('data-prime') !== null) {
-                cell.style.backgroundColor = "red";
+                cell.classList.add('highlight');
             }
         }
     );
 }
 
+function acceptRound () { // decides if selected cells win round
+    primeCount = 0;
+    Array.from(cells).forEach(
+        function (x) {
+            if (x.classList.contains('selected') && x.getAttribute('data-prime') !== null) {
+                primeCount += 1;
+            }
+        }
+    );
+    if (primeCount === Math.floor(N**2 /2)) {return true}
+    else {return false}
+}
+
 let N = 4;
-let Diff_max = 400;
+let Diff_max = 800;
 
 // Making a truly square board
 const board = document.querySelector("#board");
@@ -122,7 +141,18 @@ let cell_width = cell_height;
 addCells(N);
 window.addEventListener('resize', () => resizeCells());
 
-// Ref for cells appearing in the board
-let cells = board.querySelectorAll('.cell');
+// Ref for cells appearing in the board and setting event listeners for 'click' event
+const cells = board.querySelectorAll('.cell');
+cells.forEach(
+    function (x) {
+        x.addEventListener('click',
+            function (e) {
+                e.currentTarget.classList.toggle('selected');
+            }
+        );
+    }
+);
 
-setNumbers(N);
+
+
+setNumbers();

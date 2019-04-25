@@ -140,7 +140,7 @@ function startTimer(time) {
     return timeDisplay
 }
 
-const time = 4;
+const time = 15;
 const timer = document.querySelector("#timer");
 
 let N = 4;

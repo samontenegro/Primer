@@ -137,9 +137,10 @@ function startTimer(time) {
             clearInterval(timeDisplay);
         }
     },1000);
+    return timeDisplay
 }
 
-const time = 20;
+const time = 4;
 const timer = document.querySelector("#timer");
 
 let N = 4;
@@ -172,7 +173,13 @@ cells.forEach(
     }
 );
 
-
+next.addEventListener('click', // TO DO: Add acceptRound logic and score-keeping functionality
+    function () {
+        setNumbers();
+        clearInterval(timer_id);
+        timer_id = startTimer(time);
+    }
+);
 
 setNumbers();
-startTimer(time);
+let timer_id = startTimer(time);

@@ -94,7 +94,7 @@ function setNumbers () { // fills the N^2 cells with a number, so that N/2 cells
                     next_selected_cell.setAttribute('data-prime','data-prime');
                     break
                 }
-                val_2 -= 1
+                val_2 += 1
             }
         }
     }
@@ -126,25 +126,29 @@ function acceptRound () { // decides if selected cells win round
     else {return false}
 }
 
-function startTimer(time) {
+function startTimer(time) { // starts timer and ends it when time reaches 0
     timer.textContent = `${time}`;
     let timeDisplay = setInterval( function() {
-        if (time > 0) {
+        if (time > 1) {
             time -= 1;
             timer.textContent = `${time}`;
         } else {
-            timer.textContent = `${time}`;
+            timer.textContent = `${time - 1}`;
             clearInterval(timeDisplay);
+            next.textContent = "Time's up!";
+
+            timer.classList.toggle('hidden');
+            next.classList.toggle('finished');
         }
     },1000);
     return timeDisplay
 }
 
-const time = 15;
+const time = 4;
 const timer = document.querySelector("#timer");
 
-let N = 4;
-let Diff_max = 100;
+let N = 2;
+let Diff_max = 60;
 
 // Making a truly square board
 const board = document.querySelector("#board");
@@ -173,13 +177,17 @@ cells.forEach(
     }
 );
 
-next.addEventListener('click', // TO DO: Add acceptRound logic and score-keeping functionality
+next.addEventListener('click', // TO DO: Add score-keeping functionality
     function () {
-        setNumbers();
-        clearInterval(timer_id);
-        timer_id = startTimer(time);
+        if (acceptRound()) {
+            setNumbers();
+            clearInterval(timer_id);
+            timer_id = startTimer(time);
+        }
     }
 );
 
+
+// This part starts the game
 setNumbers();
 let timer_id = startTimer(time);

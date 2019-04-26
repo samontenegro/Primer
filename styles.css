@@ -84,6 +84,21 @@ div.cell > p {
     border-radius: 4em;
 }
 
+.hidden {
+    display: none;
+}
+
+#next-round.finished {
+    position: relative;
+    right: 0%;
+    border: solid 1px;
+    box-shadow: 0 0.5vh rgb(30,30,30);
+}
+
+#next-round.finished:active {
+    border: none;
+}
+
 
 @media screen and (orientation: landscape) {
     .container {

@@ -144,11 +144,11 @@ function startTimer(time) { // starts timer and ends it when time reaches 0
     return timeDisplay
 }
 
-const time = 4;
+const time = 6;
 const timer = document.querySelector("#timer");
 
 let N = 2;
-let Diff_max = 60;
+let Diff_max = 100;
 
 // Making a truly square board
 const board = document.querySelector("#board");

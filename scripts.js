@@ -168,7 +168,7 @@ function pushScore (val) { // adds val into "score"
     else {score.textContent = parseInt(score.textContent) + val}
 }
 
-let N = 3;
+let N = 2;
 let Diff_max = 200;
 const time = 2 * N**2;
 const timer = document.querySelector("#timer");

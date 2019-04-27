@@ -113,17 +113,38 @@ function highlightPrimes () { // highlights cells with prime values
 }
 
 function acceptRound () { // decides if selected cells win round
-    let primeCount = 0;
     let currentTime = parseInt(timer.textContent);
-    Array.from(cells).forEach(
+    
+    if (currentTime <= 0) {
+        return false
+    }
+
+    let selected = Array.from(cells).filter(
         function (x) {
-            if (x.classList.contains('selected') && x.getAttribute('data-prime') !== null && currentTime > 0) {
-                primeCount += 1;
+            if (x.classList.contains('selected')) {
+                return true
             }
         }
     );
-    if (primeCount === Math.floor(N**2 /2)) {return true}
-    else {return false}
+
+    let selected_primes = selected.filter(
+        function (x) {
+            if (x.getAttribute('data-prime') !== null) {
+                return true
+            }
+        }
+    );
+        console.log(selected === selected_primes);
+
+    if (selected_primes.length === selected.length && selected_primes.length === Math.floor(N**2 /2)) {
+        console.log('yay')
+        return true
+    } else {
+        return false
+    }
+
+
+    // if (primeCount === Math.floor(N**2 /2)) {return true}
 }
 
 function startTimer(time) { // starts timer and ends it when time reaches 0
@@ -144,7 +165,7 @@ function startTimer(time) { // starts timer and ends it when time reaches 0
     return timeDisplay
 }
 
-const time = 6;
+const time = 7;
 const timer = document.querySelector("#timer");
 
 let N = 2;

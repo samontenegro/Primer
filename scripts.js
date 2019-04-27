@@ -134,10 +134,8 @@ function acceptRound () { // decides if selected cells win round
             }
         }
     );
-        console.log(selected === selected_primes);
 
     if (selected_primes.length === selected.length && selected_primes.length === Math.floor(N**2 /2)) {
-        console.log('yay')
         return true
     } else {
         return false
@@ -165,11 +163,16 @@ function startTimer(time) { // starts timer and ends it when time reaches 0
     return timeDisplay
 }
 
-const time = 7;
-const timer = document.querySelector("#timer");
+function pushScore (val) { // adds val into "score"
+    if (score.textContent === "") {score.textContent = val}
+    else {score.textContent = parseInt(score.textContent) + val}
+}
 
-let N = 2;
-let Diff_max = 100;
+let N = 3;
+let Diff_max = 200;
+const time = 2 * N**2;
+const timer = document.querySelector("#timer");
+const score = document.querySelector('#score');
 
 // Making a truly square board
 const board = document.querySelector("#board");
@@ -201,6 +204,7 @@ cells.forEach(
 next.addEventListener('click', // TO DO: Add score-keeping functionality
     function () {
         if (acceptRound()) {
+            pushScore(N**2 * timer.textContent);
             setNumbers();
             clearInterval(timer_id);
             timer_id = startTimer(time);

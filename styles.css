@@ -28,7 +28,7 @@ body {
 
 }
 
-.controls {
+.controls, #score {
     display: flex;
     justify-content: center;
 }
@@ -57,7 +57,7 @@ div.cell > p {
 .title {
     width: 96%;
     padding: 0 2% 0 2%;
-    margin: 2vh 0 2vh 0; 
+    margin: 2vh 0 0 0; 
 }
 
 .title p {
@@ -99,6 +99,12 @@ div.cell > p {
     border: none;
 }
 
+#score {
+    height: 2vh;
+    font-size: 2vh;
+    color: #999;
+    margin-bottom: 1vh;
+}
 
 @media screen and (orientation: landscape) {
     .container {

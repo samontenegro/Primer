@@ -155,7 +155,6 @@ function startTimer(time) { // starts timer and ends it when time reaches 0
             timer.textContent = `${time - 1}`;
             clearInterval(timeDisplay);
             next.textContent = "Time's up!";
-
             timer.classList.toggle('hidden');
             next.classList.toggle('finished');
         }
@@ -170,7 +169,7 @@ function pushScore (val) { // adds val into "score"
 
 let N = 2;
 let Diff_max = 200;
-const time = 2 * N**2;
+const time = N**2 + N;
 const timer = document.querySelector("#timer");
 const score = document.querySelector('#score');
 
@@ -201,7 +200,7 @@ cells.forEach(
     }
 );
 
-next.addEventListener('click', // TO DO: Add score-keeping functionality
+next.addEventListener('click',
     function () {
         if (acceptRound()) {
             pushScore(N**2 * timer.textContent);
@@ -211,7 +210,6 @@ next.addEventListener('click', // TO DO: Add score-keeping functionality
         }
     }
 );
-
 
 // This part starts the game
 setNumbers();
